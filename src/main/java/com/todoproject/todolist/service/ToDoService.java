@@ -3,6 +3,7 @@ package com.todoproject.todolist.service;
 
 import com.todoproject.todolist.entity.ToDo;
 import com.todoproject.todolist.repository.ToDoRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,22 +17,24 @@ public class ToDoService {
     }
 
 
-    public List<ToDo> create() {
-
-        return null;
+    public List<ToDo> create(ToDo todo) {
+        todoRepository.save(todo);
+        return list();
     }
 
     public List<ToDo> list() {
-
-        return null;
+        Sort sort = Sort.by("prioridade").descending().and(Sort.by("nome").ascending());
+        return todoRepository.findAll(sort);
     }
 
-    public List<ToDo> update() {
-        return null;
+    public List<ToDo> update(ToDo todo) {
+        todoRepository.save(todo);
+        return list();
     }
 
-    public List<ToDo> delete() {
-        return null;
+    public List<ToDo> delete(Long id) {
+        todoRepository.deleteById(id);
+        return list();
     }
 
 }

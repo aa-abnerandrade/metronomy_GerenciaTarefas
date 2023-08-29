@@ -5,12 +5,18 @@ import com.todoproject.todolist.entity.ToDo;
 import com.todoproject.todolist.service.ToDoService;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @RestController
 @RequestMapping("/todos")
 public class ToDoController {
     private ToDoService todoService;
+    private static Logger logger = LoggerFactory.getLogger(ToDoController.class);
+
 
     public ToDoController(ToDoService todoService) {
         this.todoService = todoService;
@@ -24,6 +30,7 @@ public class ToDoController {
 
     @GetMapping
     List<ToDo> list() {
+        logger.info("Listar Tarefas");
         return todoService.list();
 
     }

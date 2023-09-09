@@ -24,5 +24,6 @@ public class ToDo {
     private int prioridade;
 
 
-
+    public ToDo(String nome, String descricao, boolean realizado, int prioridade) {
+    }
 }

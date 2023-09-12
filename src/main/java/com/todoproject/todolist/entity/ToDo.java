@@ -1,6 +1,7 @@
 package com.todoproject.todolist.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,8 +16,10 @@ public class ToDo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String nome;
 
+    @NotBlank
     private String descricao;
 
     private boolean realizado;

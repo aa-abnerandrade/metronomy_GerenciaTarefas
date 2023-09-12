@@ -37,6 +37,14 @@ class TodolistApplicationTests {
 
 	@Test
 	void testCreateToDoFailure() {
+		var todo = new ToDo("", "", false, 0);
+
+		webTestClient
+				.post()
+				.uri("/todos")
+				.bodyValue(todo)
+				.exchange()
+				.expectStatus().isBadRequest();
 
 	}
 

@@ -4,10 +4,13 @@ import com.todoproject.todolist.entity.ToDo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import static com.todoproject.todolist.ConstantsTest.TODOS;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Sql("/remove.sql")
 class TodolistApplicationTests {
 
 	@Autowired
@@ -47,5 +50,25 @@ class TodolistApplicationTests {
 				.expectStatus().isBadRequest();
 
 	}
+
+	@Sql("/import.sql")
+	@Test
+	void testListToDoSuccess() {
+
+		webTestClient
+				.get()
+				.uri("/todos")
+				.exchange()
+				.expectStatus().isOk()
+				.expectBody()
+				.jsonPath("$").isArray()
+				.jsonPath("$.length()").isEqualTo(5)
+				.jsonPath("$[0]").isEqualTo(TODOS.get(0))
+				.jsonPath("$[1]").isEqualTo(TODOS.get(1))
+				.jsonPath("$[2]").isEqualTo(TODOS.get(2))
+				.jsonPath("$[3]").isEqualTo(TODOS.get(3))
+				.jsonPath("$[4]").isEqualTo(TODOS.get(4));
+	}
+
 
 }

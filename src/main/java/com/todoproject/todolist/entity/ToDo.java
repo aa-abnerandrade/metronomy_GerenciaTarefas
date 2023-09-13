@@ -27,6 +27,23 @@ public class ToDo {
     private int prioridade;
 
 
-    public ToDo(String nome, String descricao, boolean realizado, int prioridade) {
+    public ToDo(){
     }
+
+    public ToDo(String nome, String descricao, boolean realizado, int prioridade) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.realizado = realizado;
+        this.prioridade = prioridade;
+    }
+
+    public ToDo(Long id, @NotBlank String nome, @NotBlank String descricao, boolean realizado, int prioridade) {
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.realizado = realizado;
+        this.prioridade = prioridade;
+    }
+
+
 }

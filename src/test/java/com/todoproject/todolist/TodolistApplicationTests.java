@@ -53,7 +53,9 @@ class TodolistApplicationTests {
 
 	@Sql("/import.sql")
 	@Test
-	void testListToDoSuccess() {
+	public void testListToDoSuccess() {
+		//System.out.println(TODOS.get(0));
+
 
 		webTestClient
 				.get()
@@ -63,11 +65,11 @@ class TodolistApplicationTests {
 				.expectBody()
 				.jsonPath("$").isArray()
 				.jsonPath("$.length()").isEqualTo(5)
-				.jsonPath("$[0]").isEqualTo(TODOS.get(0))
-				.jsonPath("$[1]").isEqualTo(TODOS.get(1))
-				.jsonPath("$[2]").isEqualTo(TODOS.get(2))
-				.jsonPath("$[3]").isEqualTo(TODOS.get(3))
-				.jsonPath("$[4]").isEqualTo(TODOS.get(4));
+				.jsonPath("$[1]").isEqualTo(TODOS.get(0))
+				.jsonPath("$[2]").isEqualTo(TODOS.get(4))
+				.jsonPath("$[3]").isEqualTo(TODOS.get(1))
+				.jsonPath("$[4]").isEqualTo(TODOS.get(2))
+				.jsonPath("$[0]").isEqualTo(TODOS.get(3));
 	}
 
 

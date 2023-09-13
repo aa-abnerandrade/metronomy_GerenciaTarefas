@@ -1,5 +1,6 @@
 package com.todoproject.todolist.entity;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -45,5 +46,10 @@ public class ToDo {
         this.prioridade = prioridade;
     }
 
+
+    @Override
+    public boolean equals(Object obj) {
+        return EqualsBuilder.reflectionEquals(obj, this);
+    }
 
 }

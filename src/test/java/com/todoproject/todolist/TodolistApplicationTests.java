@@ -51,6 +51,7 @@ class TodolistApplicationTests {
 
 	}
 
+
 	@Sql("/import.sql")
 	@Test
 	public void testListToDoSuccess() {
@@ -72,5 +73,16 @@ class TodolistApplicationTests {
 				.jsonPath("$[0]").isEqualTo(TODOS.get(3));
 	}
 
+
+	@Test
+	public void testUpdateToDoSuccess() {
+
+	}
+
+
+	@Test
+	public void testUpdateToDoFailure() {
+
+	}
 
 }

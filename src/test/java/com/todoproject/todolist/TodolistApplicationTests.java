@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import static com.todoproject.todolist.ConstantsTest.TODO;
 import static com.todoproject.todolist.ConstantsTest.TODOS;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -51,6 +52,18 @@ class TodolistApplicationTests {
 
 	}
 
+//	@Sql("/import.sql")
+//	@Test
+//	public void imprimirTodos() {
+//		for (int i = 0; i <= 4; i++) {
+//			System.out.println(
+//					TODOS.get(i).getId() + " | " +
+//					TODOS.get(i).getNome() + " | " +
+//					TODOS.get(i).getDescricao() + " | " +
+//					TODOS.get(i).getPrioridade()
+//			);
+//		}
+//	}
 
 	@Sql("/import.sql")
 	@Test
@@ -66,23 +79,51 @@ class TodolistApplicationTests {
 				.expectBody()
 				.jsonPath("$").isArray()
 				.jsonPath("$.length()").isEqualTo(5)
-				.jsonPath("$[1]").isEqualTo(TODOS.get(0))
-				.jsonPath("$[2]").isEqualTo(TODOS.get(4))
+				.jsonPath("$[0]").isEqualTo(TODOS.get(4))
+				.jsonPath("$[1]").isEqualTo(TODOS.get(3))
+				.jsonPath("$[2]").isEqualTo(TODOS.get(2))
 				.jsonPath("$[3]").isEqualTo(TODOS.get(1))
-				.jsonPath("$[4]").isEqualTo(TODOS.get(2))
-				.jsonPath("$[0]").isEqualTo(TODOS.get(3));
+				.jsonPath("$[4]").isEqualTo(TODOS.get(0));
 	}
 
 
+	@Sql("/import.sql")
 	@Test
 	public void testUpdateToDoSuccess() {
+		var todo = new ToDo(TODO.getId(), "UP " + TODO.getNome(), "UP " + TODO.getDescricao(), !TODO.isRealizado(), TODO.getPrioridade());
 
+
+		webTestClient
+				.put()
+				.uri("/todos/" + TODO.getId())
+				.bodyValue(todo)
+				.exchange()
+				.expectStatus().isOk()
+				.expectBody()
+				.jsonPath("$").isArray()
+				.jsonPath("$.length()").isEqualTo(5)
+				.jsonPath("$[4].nome").isEqualTo(todo.getNome())
+				.jsonPath("$[4].descricao").isEqualTo(todo.getDescricao())
+				.jsonPath("$[4].realizado").isEqualTo(todo.isRealizado())
+				.jsonPath("$[4].prioridade").isEqualTo(todo.getPrioridade());
 	}
+
+
 
 
 	@Test
 	public void testUpdateToDoFailure() {
+		Long unexinstingId = 100L;
 
+		webTestClient
+				.put()
+				.uri("/todos/" + unexinstingId)
+				.bodyValue(
+						new ToDo(unexinstingId, "", "", false, 0))
+				.exchange()
+				.expectStatus().isBadRequest();
 	}
+
+
 
 }

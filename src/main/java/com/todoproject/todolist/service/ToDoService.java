@@ -3,6 +3,7 @@ package com.todoproject.todolist.service;
 
 import com.todoproject.todolist.entity.ToDo;
 import com.todoproject.todolist.repository.ToDoRepository;
+import com.todoproject.todolist.util.BadRequestException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +28,15 @@ public class ToDoService {
         return todoRepository.findAll(sort);
     }
 
-    public List<ToDo> update(ToDo todo) {
-        todoRepository.save(todo);
+    public List<ToDo> update(Long id, ToDo todo) {
+
+        todoRepository.findById(id).ifPresentOrElse((existingToDo) -> {
+            todo.setId(id);
+            todoRepository.save(todo);
+        }, () -> {
+            throw  new BadRequestException("Essa ToDo não existe.");
+        });
+
         return list();
     }
 

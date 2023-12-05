@@ -4,6 +4,7 @@
 **Uma API. Simples. Permite criar, listar, atualizar e deletar tarefas (CRUD)**
 
 ## Linguagens e Tecnologias
+- Java 17+ 
 - Spring Boot
 - Spring MVC
 - Spring Data JPA
@@ -30,12 +31,38 @@
 <br> O Swagger poderá ser visualizado em **_localhost:8080/swagger-ui.html_**
 
 
-## Screenshot
+## Endpoints
 
-<div align="center">
-    <img src=""/>  
-</div>
-
+- Criar Tarefa
+```cURL 
+curl --location 'localhost:8080/todos' \
+--header 'Content-Type: application/json' \
+--data '{
+    "nome":"Exemplo de Tarefa 1",
+    "descricao":"Uma descrição para a TTarefa 1",
+    "prioridade": 3,
+    "realizado": false
+}'
+```
+- Listar Tarefa
+```cURL 
+curl --location 'localhost:8080/todos'
+```
+- Atualizar Tarefa
+```cURL 
+curl --location --request PUT 'localhost:8080/todos' \
+--header 'Content-Type: application/json' \
+--data '{
+    "id": 1,
+    "nome": "Exemplo de Tarefa 1",
+    "descricao": "Uma melhor descrição para Tarefa 1",
+    "prioridade": 5
+}'
+```
+- Deletar Tarefa
+```cURL 
+curl --location --request DELETE 'localhost:8080/todos/1'
+```
 
 ## Autoria
 

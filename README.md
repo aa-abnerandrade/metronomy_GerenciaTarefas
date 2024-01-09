@@ -66,9 +66,10 @@ curl --location --request DELETE 'localhost:8080/todos/1'£¢
 
 ## Autoria
 
-Abner Andrade Graduando em Análise e Desenvolvimento de Sistemas, apaixonado por desenvolvimento e eterno aprendiz.
+**Abner Andrade** 
+<br>_Graduando em Análise e Desenvolvimento de Sistemas, apaixonado por desenvolvimento e eterno aprendiz._
 
-👋🏽 Curtiu? Entre em contato!
+👋🏽 Me encontre nas redes:
 <div style="display: flex">
 <a href = "https://www.linkedin.com/in/abnerandrade/"><img src="https://img.icons8.com/color/64/null/linkedin-circled--v1.png" target="_blank"></a>
 <a href = "https://api.whatsapp.com/send?phone=5521973257039&text=Oi,%20Abner.%20Curti%20tua%20Pokedex.%20%20Vamos%20trabalhar%20juntos?"><img src="https://img.icons8.com/color/64/null/whatsapp--v1.png" target="_blank"></a>

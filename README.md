@@ -1,7 +1,7 @@
 # Metronomy
 
 
-**Uma API. Simples. Permite criar, listar, atualizar e deletar tarefas (CRUD)**
+**Uma API. Simples. Permite criar, listar, atualizar e deletar tarefas (CRUD).**
 
 ## Linguagens e Tecnologias
 - Java 17+ 
@@ -61,7 +61,7 @@ curl --location --request PUT 'localhost:8080/todos' \
 ```
 - Deletar Tarefa
 ```cURL 
-curl --location --request DELETE 'localhost:8080/todos/1'
+curl --location --request DELETE 'localhost:8080/todos/1'£¢
 ```
 
 ## Autoria
